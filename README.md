@@ -1,75 +1,82 @@
-# React + TypeScript + Vite
+# 🚀 Plataforma de Empleo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Una plataforma web completa para conectar candidatos y empresas, construida con React + TypeScript.
 
-Currently, two official plugins are available:
+## 📋 Características
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### 👨‍💼 Para Candidatos
+- Registro y login
+- Editar perfil personal
+- Ver ofertas de trabajo destacadas
+- Dashboard personalizado
 
-## React Compiler
+### 🏢 Para Empresas
+- Registro y login
+- Editar perfil corporativo
+- Publicar ofertas de trabajo (próximamente)
+- Dashboard de gestión
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## 🛠️ Tecnologías utilizadas
 
-Note: This will impact Vite dev & build performances.
+| Tecnología | Uso |
+|------------|-----|
+| React 18 | UI |
+| TypeScript | Tipado estático |
+| TanStack Form | Manejo de formularios |
+| TanStack Query | Peticiones API |
+| Zod | Validaciones |
+| Zustand | Estado global |
+| React Router DOM | Rutas protegidas |
+| Vite | Build tool |
 
-## Expanding the ESLint configuration
+## 🏗️ Arquitectura
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+src/
+├── components/
+│ ├── atoms/ # Componentes básicos (Button, Input)
+│ ├── molecules/ # Combinación de átomos (InputField)
+│ ├── organisms/ # Combinación de moléculas (LoginForm)
+│ ├── templates/ # Layouts reutilizables (AuthTemplate)
+│ └── pages/ # Páginas completas
+├── hooks/ # Lógica reutilizable
+├── schemas/ # Validaciones Zod
+├── services/ # Llamadas a API
+├── stores/ # Estado global (Zustand)
+└── router/ # Configuración de rutas
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🧪 Credenciales de prueba
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+| Rol | Email | Contraseña |
+|-----|-------|------------|
+| 👨‍💼 Candidato | `demo@candidato.com` | `123456` |
+| 🏢 Empresa | `demo@empresa.com` | `123456` |
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Instalación y ejecución
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+# Clonar repositorio
+git clone https://github.com/kicknash01/plataforma-empleo.git
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+# Entrar a la carpeta
+cd plataforma-empleo
+
+# Instalar dependencias
+pnpm install
+
+# Ejecutar en modo desarrollo
+pnpm run dev
+
+# Abrir http://localhost:5173
+
+📁 Estructura de rutas
+Ruta	Descripción	Protegida
+/	Selector de rol	❌
+/login/candidato	Login candidato	❌
+/login/empresa	Login empresa	❌
+/registro/candidato	Registro candidato	❌
+/registro/empresa	Registro empresa	❌
+/dashboard	Dashboard por rol	✅
+/editar-perfil/candidato	Editar perfil candidato	✅
+/editar-perfil/empresa	Editar perfil empresa	✅
+
