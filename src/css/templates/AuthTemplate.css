@@ -1,0 +1,43 @@
+.auth-template-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  padding: 1rem;
+}
+
+.auth-template-card {
+  background-color: white;
+  border-radius: 24px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.auth-template-title {
+  font-size: 1.75rem;
+  font-weight: bold;
+  text-align: center;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.auth-template-subtitle {
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 2rem;
+  font-size: 0.875rem;
+}
+
+/* Responsive para móviles */
+@media (max-width: 640px) {
+  .auth-template-card {
+    padding: 1.5rem;
+  }
+
+  .auth-template-title {
+    font-size: 1.5rem;
+  }
+}

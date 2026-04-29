@@ -1,0 +1,10 @@
+.selectfield-container {
+  margin-bottom: 1rem;
+}
+
+.selectfield-error {
+  font-size: 0.75rem;
+  color: #dc2626;
+  margin-top: 0.25rem;
+  display: block;
+}

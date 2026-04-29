@@ -1,0 +1,31 @@
+.select-atom {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: white;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+/* Estado normal */
+.select-atom {
+  border: 1px solid #d1d5db;
+}
+
+/* Estado con error */
+.select-atom-error {
+  border-color: #dc2626;
+}
+
+/* Enfoque (cuando haces clic) */
+.select-atom:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.select-atom-error:focus {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.1);
+}
