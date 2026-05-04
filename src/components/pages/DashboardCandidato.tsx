@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../stores/auth-store';
+import { useChatStore } from '../../stores/chatStore';
+import { ChatFloatingButton } from '../molecules/ChatFloatingButton';
+import { ChatDrawer } from '../organisms/ChatDrawer';
 import '../../css/pages/DashboardCandidato.css';
 
 const DashboardCandidato: React.FC = () => {
   const navigate = useNavigate();
   const { user, logout } = useAuthStore();
+  const { conversaciones } = useChatStore();
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
+  // Calcular mensajes no leídos totales
+  const totalNoLeidos = conversaciones.reduce((sum, conv) => sum + conv.mensajesNoLeidos, 0);
 
   if (!user) {
     return <div>Cargando...</div>;
@@ -79,6 +87,10 @@ const DashboardCandidato: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Chat flotante */}
+      <ChatFloatingButton onClick={() => setIsChatOpen(true)} unreadCount={totalNoLeidos} />
+      <ChatDrawer isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
     </div>
   );
 };

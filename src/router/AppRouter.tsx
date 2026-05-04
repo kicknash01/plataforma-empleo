@@ -22,11 +22,18 @@ export const AppRouter: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Ruta principal */}
         <Route path="/" element={<SelectorRolPage />} />
+
+        {/* Rutas de login */}
         <Route path="/login/candidato" element={<LoginCandidatoPage />} />
         <Route path="/login/empresa" element={<LoginEmpresaPage />} />
+
+        {/* Rutas de registro */}
         <Route path="/registro/candidato" element={<RegisterCandidatoPage />} />
         <Route path="/registro/empresa" element={<RegisterEmpresaPage />} />
+
+        {/* Rutas de editar perfil */}
         <Route path="/editar-perfil/candidato" element={
           <ProtectedRoute>
             <EditarPerfilCandidato />
@@ -37,15 +44,17 @@ export const AppRouter: React.FC = () => {
             <EditarPerfilEmpresa />
           </ProtectedRoute>
         } />
+
+        {/* Ruta protegida del dashboard */}
         <Route path="/dashboard" element={
           <ProtectedRoute>
             <DashboardRouter />
           </ProtectedRoute>
         } />
+
+        {/* Redirección para rutas no encontradas */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   );
 };
-
-export default AppRouter;

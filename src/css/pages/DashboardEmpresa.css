@@ -330,3 +330,22 @@
     width: 100%;
   }
 }
+
+.chat-btn {
+  background-color: #8b5cf6;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background-color 0.2s;
+}
+
+.chat-btn:hover {
+  background-color: #7c3aed;
+}
+
+.dashboard-empresa {
+  padding-bottom: 80px;
+}

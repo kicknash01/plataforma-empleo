@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../stores/auth-store';
+import { useChatStore } from '../../stores/chatStore';
+import { ChatFloatingButton } from '../molecules/ChatFloatingButton';
+import { ChatDrawer } from '../organisms/ChatDrawer';
 import '../../css/pages/DashboardEmpresa.css';
 
 const DashboardEmpresa: React.FC = () => {
   const navigate = useNavigate();
   const { user, logout } = useAuthStore();
+  const { conversaciones } = useChatStore();
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
+  const totalNoLeidos = conversaciones.reduce((sum, conv) => sum + conv.mensajesNoLeidos, 0);
 
   if (!user) {
     return <div>Cargando...</div>;
@@ -28,14 +35,12 @@ const DashboardEmpresa: React.FC = () => {
         </div>
       </header>
 
-      {/* Bienvenida */}
       <div className="welcome-section">
         <h2>¡Bienvenido, {user.nombre}! 🏢</h2>
         <p>Email: {user.email}</p>
         <p>Estado: {user.email_verificado ? '✅ Email verificado' : '⚠️ Email no verificado'}</p>
       </div>
 
-      {/* Estadísticas */}
       <div className="stats-section">
         <div className="stat-card">
           <h3>📊 Ofertas publicadas</h3>
@@ -54,14 +59,10 @@ const DashboardEmpresa: React.FC = () => {
         </div>
       </div>
 
-      {/* Botón para crear oferta */}
       <div className="create-offer-section">
-        <button className="create-offer-btn">
-          ➕ Crear nueva oferta
-        </button>
+        <button className="create-offer-btn">➕ Crear nueva oferta</button>
       </div>
 
-      {/* Ofertas publicadas */}
       <div className="offers-section">
         <h3>📋 Mis ofertas publicadas</h3>
         <div className="offers-list">
@@ -81,6 +82,9 @@ const DashboardEmpresa: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <ChatFloatingButton onClick={() => setIsChatOpen(true)} unreadCount={totalNoLeidos} />
+      <ChatDrawer isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
     </div>
   );
 };
