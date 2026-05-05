@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import LoginPage from '../components/pages/LoginPage';  // ← NUEVO
-import RegistroSelectorPage from '../components/pages/RegistroSelectorPage';  // ← NUEVO
+import LoginPage from '../components/pages/LoginPage';
+import RegistroSelectorPage from '../components/pages/RegistroSelectorPage';
 import RegisterCandidatoPage from '../components/pages/RegisterCandidatoPage';
 import RegisterEmpresaPage from '../components/pages/RegisterEmpresaPage';
+import VerificarEmailPage from '../components/pages/VerificarEmailPage';  // ← NUEVA IMPORTACIÓN
 import EditarPerfilCandidato from '../components/pages/EditarPerfilCandidato';
 import EditarPerfilEmpresa from '../components/pages/EditarPerfilEmpresa';
 import DashboardRouter from '../components/DashboardRouter';
@@ -21,7 +22,7 @@ export const AppRouter: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Ruta principal - Selector de rol (redirige al login) */}
+        {/* Ruta principal - Redirige al login */}
         <Route path="/" element={<Navigate to="/login" replace />} />
 
         {/* Login unificado */}
@@ -33,6 +34,9 @@ export const AppRouter: React.FC = () => {
         {/* Rutas de registro */}
         <Route path="/registro/candidato" element={<RegisterCandidatoPage />} />
         <Route path="/registro/empresa" element={<RegisterEmpresaPage />} />
+
+        {/* Ruta de verificación de email - NUEVA */}
+        <Route path="/verificar-email" element={<VerificarEmailPage />} />
 
         {/* Rutas de editar perfil */}
         <Route path="/editar-perfil/candidato" element={

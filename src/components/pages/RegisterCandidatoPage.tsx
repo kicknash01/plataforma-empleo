@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthTemplate } from '../templates/AuthTemplate';
 import { RegisterCandidatoForm } from '../organisms/RegisterCandidatoForm';
+import { emailService } from '../../services/emailService';
 import type { RegisterCandidatoFormData } from '../../schemas/registerCandidatoSchema';
 
 const RegisterCandidatoPage: React.FC = () => {
@@ -14,13 +15,25 @@ const RegisterCandidatoPage: React.FC = () => {
     setServerError(null);
 
     try {
-      console.log('Registrando:', data);
+      console.log('Registrando candidato:', data);
+
+      // Simular llamada al servidor (1 segundo)
       await new Promise(resolve => setTimeout(resolve, 1000));
-      alert('¡Registro exitoso! Ahora puedes iniciar sesión.');
-      navigate('/login/candidato');
-    } catch (err) {
+
+      // Enviar email de verificación
+      const mockToken = 'mock-token-' + Math.random().toString(36);
+      await emailService.enviarVerificacion(data.email, mockToken);
+      console.log(`🔗 Link de verificación: http://localhost:5173/verificar-email?token=${mockToken}`);
+
+      alert('¡Registro exitoso! Revisa tu email para verificar tu cuenta.');
+      navigate('/login');
+    } catch (err: unknown) {
       console.error('Error en registro:', err);
-      setServerError('Error en el registro. Intenta nuevamente.');
+      if (err instanceof Error) {
+        setServerError(err.message);
+      } else {
+        setServerError('Ocurrió un error desconocido');
+      }
     } finally {
       setIsLoading(false);
     }

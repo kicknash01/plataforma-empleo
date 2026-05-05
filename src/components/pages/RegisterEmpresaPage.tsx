@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthTemplate } from '../templates/AuthTemplate';
 import { RegisterEmpresaForm } from '../organisms/RegisterEmpresaForm';
+import { emailService } from '../../services/emailService';
 import type { RegisterEmpresaFormData } from '../../schemas/registerEmpresaSchema';
 
 const RegisterEmpresaPage: React.FC = () => {
@@ -15,12 +16,23 @@ const RegisterEmpresaPage: React.FC = () => {
 
     try {
       console.log('Registrando empresa:', data);
-      // Simular llamada al servidor (1 segundo)
+
       await new Promise(resolve => setTimeout(resolve, 1000));
-      alert('¡Registro exitoso! Ahora puedes iniciar sesión.');
-      navigate('/login/empresa');
-    } catch {
-      setServerError('Error en el registro. Intenta nuevamente.');
+
+      // Enviar email de verificación
+      const mockToken = 'mock-token-' + Math.random().toString(36);
+      await emailService.enviarVerificacion(data.email, mockToken);
+      console.log(`🔗 Link de verificación: http://localhost:5173/verificar-email?token=${mockToken}`);
+
+      alert('¡Registro exitoso! Revisa tu email para verificar tu cuenta.');
+      navigate('/login');
+    } catch (err: unknown) {
+      console.error('Error en registro:', err);
+      if (err instanceof Error) {
+        setServerError(err.message);
+      } else {
+        setServerError('Ocurrió un error desconocido');
+      }
     } finally {
       setIsLoading(false);
     }

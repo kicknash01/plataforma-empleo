@@ -1,0 +1,84 @@
+/* src/css/pages/VerificarEmailPage.css */
+
+.verificar-email-container {
+  text-align: center;
+  padding: 1rem;
+}
+
+/* ===== ESTADO DE CARGA ===== */
+.verificar-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #e5e7eb;
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===== ESTADO DE ERROR ===== */
+.verificar-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.verificar-error span {
+  font-size: 3rem;
+}
+
+.verificar-error p {
+  font-size: 1rem;
+  color: #dc2626;
+}
+
+/* ===== ESTADO DE ÉXITO ===== */
+.verificar-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.verificar-success span {
+  font-size: 3rem;
+}
+
+.verificar-success p {
+  font-size: 1rem;
+  color: #1f2937;
+}
+
+.verificar-subtext {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* ===== BOTÓN COMÚN ===== */
+.verificar-button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.5rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.verificar-button:hover {
+  background-color: #2563eb;
+}

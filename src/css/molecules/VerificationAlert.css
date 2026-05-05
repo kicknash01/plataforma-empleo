@@ -1,0 +1,62 @@
+/* src/css/molecules/VerificationAlert.css */
+
+.verification-alert {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: #fef3c7;
+  border: 1px solid #fbbf24;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.verification-alert-icon {
+  font-size: 1.5rem;
+}
+
+.verification-alert-content {
+  flex: 1;
+}
+
+.verification-alert-content h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #92400e;
+  margin: 0 0 0.25rem 0;
+}
+
+.verification-alert-content p {
+  font-size: 0.75rem;
+  color: #92400e;
+  margin: 0;
+}
+
+.verification-alert-button {
+  background-color: #f59e0b;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.verification-alert-button:hover:not(:disabled) {
+  background-color: #d97706;
+}
+
+.verification-alert-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Responsive para móviles */
+@media (max-width: 640px) {
+  .verification-alert {
+    flex-direction: column;
+    text-align: center;
+  }
+}

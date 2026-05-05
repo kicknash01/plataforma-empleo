@@ -1,6 +1,8 @@
+// src/services/auth-service.ts
+
 import type { LoginCredentials, AuthResponse } from "../interfaces/auth.interfaces";
 
-const API_URL: string = 'http://localhost:3000/api';
+const API_URL = 'https://rb93kccl-3000.use2.devtunnels.ms';
 const USE_MOCK = true;
 
 export const authService = {
@@ -9,7 +11,6 @@ export const authService = {
     if (USE_MOCK) {
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-      // Detectar rol según el email
       if (credentials.email === 'demo@candidato.com' && credentials.password === '123456') {
         return {
           access_token: 'mock-token-candidato-' + Math.random().toString(36),
@@ -38,10 +39,9 @@ export const authService = {
         };
       }
 
-      throw new Error('❌ Credenciales inválidas');
+      throw new Error('Credenciales inválidas');
     }
 
-    // Versión real (cuando tengas backend)
     const response = await fetch(`${API_URL}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -52,11 +52,54 @@ export const authService = {
     return data;
   },
 
-  // Mantener funciones específicas por si acaso
   loginCandidato: async (credentials: LoginCredentials): Promise<AuthResponse> => {
     return authService.login(credentials);
   },
+
   loginEmpresa: async (credentials: LoginCredentials): Promise<AuthResponse> => {
     return authService.login(credentials);
+  },
+
+  // Verificar email con token
+  verificarEmail: async (token: string): Promise<{ message: string }> => {
+    if (USE_MOCK) {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      if (token && token.length > 0) {
+        return { message: 'Email verificado correctamente' };
+      }
+      throw new Error('Token inválido');
+    }
+
+    const response = await fetch(`${API_URL}/auth/verificar-email`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token }),
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message || 'Error al verificar email');
+    return data;
+  },
+
+  // Reenviar email de verificación
+  reenviarVerificacion: async (email: string): Promise<{ message: string }> => {
+    if (USE_MOCK) {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      const mockToken = 'mock-token-' + Math.random().toString(36);
+      console.log(`📧 Reenviando verificación a: ${email}`);
+      console.log(`🔗 Link: http://localhost:5173/verificar-email?token=${mockToken}`);
+
+      return { message: 'Email de verificación reenviado' };
+    }
+
+    const response = await fetch(`${API_URL}/auth/reenviar-verificacion`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message || 'Error al reenviar verificación');
+    return data;
   },
 };
