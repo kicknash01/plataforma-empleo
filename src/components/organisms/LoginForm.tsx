@@ -3,14 +3,12 @@ import { InputField } from '../molecules/InputField';
 import { PasswordInput } from '../molecules/PasswordInput';
 import { Button } from '../atoms/Button';
 import { ErrorAlert } from '../molecules/ErrorAlert';
-import '../../css/organisms/LoginForm.css';
 
 interface LoginFormProps {
   onSubmit: (email: string, password: string) => void;
   isLoading?: boolean;
   serverError?: string | null;
   onClearError?: () => void;
-  variant?: 'candidato' | 'empresa';
 }
 
 export const LoginForm: React.FC<LoginFormProps> = ({
@@ -18,7 +16,6 @@ export const LoginForm: React.FC<LoginFormProps> = ({
   isLoading = false,
   serverError,
   onClearError,
-  variant = 'candidato',
 }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -47,29 +44,21 @@ export const LoginForm: React.FC<LoginFormProps> = ({
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-
     validateEmail(email);
     validatePassword(password);
-
-    const hasEmailError = emailError !== '';
-    const hasPasswordError = passwordError !== '';
-
-    if (!hasEmailError && !hasPasswordError && email && password) {
+    if (!emailError && !passwordError && email && password) {
       onSubmit(email, password);
     }
   };
 
-  const buttonVariant = variant === 'candidato' ? 'primary' : 'success';
-  const buttonText = variant === 'candidato' ? 'Iniciar sesión como Candidato' : 'Ingresar como Empresa';
-
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="login-form">
       <ErrorAlert message={serverError ?? null} onClose={onClearError || (() => { })} />
 
       <InputField
         label="📧 Correo electrónico"
         type="email"
-        placeholder={variant === 'candidato' ? 'demo@candidato.com' : 'demo@empresa.com'}
+        placeholder="demo@ejemplo.com"
         value={email}
         onChange={(value) => {
           setEmail(value);
@@ -89,12 +78,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({
         error={passwordError}
       />
 
-      <Button
-        type="submit"
-        disabled={isLoading}
-        variant={buttonVariant}
-      >
-        {isLoading ? 'Iniciando...' : buttonText}
+      <Button type="submit" disabled={isLoading} variant="primary">
+        {isLoading ? 'Iniciando...' : 'Ingresar'}
       </Button>
     </form>
   );

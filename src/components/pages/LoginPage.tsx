@@ -4,9 +4,9 @@ import { AuthTemplate } from '../templates/AuthTemplate';
 import { LoginForm } from '../organisms/LoginForm';
 import { useAuthStore } from '../../stores/auth-store';
 import { authService } from '../../services/auth-service';
-import '../../css/pages/LoginCandidatoPage.css';
+import '../../css/pages/LoginPage.css';
 
-const LoginCandidatoPage: React.FC = () => {
+const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
@@ -17,7 +17,7 @@ const LoginCandidatoPage: React.FC = () => {
     setServerError(null);
 
     try {
-      const response = await authService.loginCandidato({ email, password });
+      const response = await authService.login({ email, password });
       setUser(response.user);
       setAccessToken(response.access_token);
       navigate('/dashboard');
@@ -32,22 +32,19 @@ const LoginCandidatoPage: React.FC = () => {
     }
   };
 
-  const handleClearError = () => {
-    setServerError(null);
-  };
+  const handleClearError = () => setServerError(null);
 
   return (
-    <AuthTemplate title="Login Candidato" subtitle="Ingresa a tu cuenta para buscar empleo">
+    <AuthTemplate title="Iniciar Sesión" subtitle="Ingresa a tu cuenta">
       <LoginForm
         onSubmit={handleLogin}
         isLoading={isLoading}
         serverError={serverError}
         onClearError={handleClearError}
-        variant="candidato"
       />
       <div className="login-register-link">
         <button
-          onClick={() => navigate('/registro/candidato')}
+          onClick={() => navigate('/registro/seleccionar')}
           className="login-register-button"
         >
           ¿No tienes cuenta? Regístrate
@@ -57,4 +54,4 @@ const LoginCandidatoPage: React.FC = () => {
   );
 };
 
-export default LoginCandidatoPage;
+export default LoginPage;

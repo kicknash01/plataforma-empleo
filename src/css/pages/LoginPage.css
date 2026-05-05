@@ -1,6 +1,8 @@
 .login-register-link {
   text-align: center;
   margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
 }
 
 .login-register-button {
@@ -8,11 +10,9 @@
   border: none;
   color: #3b82f6;
   cursor: pointer;
-  text-decoration: underline;
   font-size: 0.875rem;
-  transition: color 0.2s;
 }
 
 .login-register-button:hover {
-  color: #2563eb;
+  text-decoration: underline;
 }

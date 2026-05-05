@@ -1,19 +1,18 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import LoginCandidatoPage from '../components/pages/LoginCandidatoPage';
-import LoginEmpresaPage from '../components/pages/LoginEmpresaPage';
+import LoginPage from '../components/pages/LoginPage';  // ← NUEVO
+import RegistroSelectorPage from '../components/pages/RegistroSelectorPage';  // ← NUEVO
 import RegisterCandidatoPage from '../components/pages/RegisterCandidatoPage';
 import RegisterEmpresaPage from '../components/pages/RegisterEmpresaPage';
 import EditarPerfilCandidato from '../components/pages/EditarPerfilCandidato';
 import EditarPerfilEmpresa from '../components/pages/EditarPerfilEmpresa';
 import DashboardRouter from '../components/DashboardRouter';
-import SelectorRolPage from '../components/pages/SelectorRolPage';
 import { useAuthStore } from '../stores/auth-store';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user } = useAuthStore();
   if (!user) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/login" replace />;
   }
   return <>{children}</>;
 };
@@ -22,12 +21,14 @@ export const AppRouter: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Ruta principal */}
-        <Route path="/" element={<SelectorRolPage />} />
+        {/* Ruta principal - Selector de rol (redirige al login) */}
+        <Route path="/" element={<Navigate to="/login" replace />} />
 
-        {/* Rutas de login */}
-        <Route path="/login/candidato" element={<LoginCandidatoPage />} />
-        <Route path="/login/empresa" element={<LoginEmpresaPage />} />
+        {/* Login unificado */}
+        <Route path="/login" element={<LoginPage />} />
+
+        {/* Selección de rol para registro */}
+        <Route path="/registro/seleccionar" element={<RegistroSelectorPage />} />
 
         {/* Rutas de registro */}
         <Route path="/registro/candidato" element={<RegisterCandidatoPage />} />
@@ -53,7 +54,7 @@ export const AppRouter: React.FC = () => {
         } />
 
         {/* Redirección para rutas no encontradas */}
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
   );
