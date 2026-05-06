@@ -1,0 +1,67 @@
+/* src/css/pages/Recuperacion.css */
+
+/* ===== ESTADO DE ÉXITO ===== */
+.recuperacion-success,
+.resetear-success,
+.resetear-error {
+  text-align: center;
+  padding: 1rem;
+}
+
+.recuperacion-success span,
+.resetear-success span,
+.resetear-error span {
+  font-size: 3rem;
+}
+
+.recuperacion-success p,
+.resetear-success p,
+.resetear-error p {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.recuperacion-subtext,
+.resetear-subtext {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* ===== BOTONES ===== */
+.recuperacion-button,
+.resetear-button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.5rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.recuperacion-button:hover,
+.resetear-button:hover {
+  background-color: #2563eb;
+}
+
+/* ===== ENLACE PARA VOLVER ===== */
+.recuperacion-link {
+  text-align: center;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.recuperacion-back-button {
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: color 0.2s;
+}
+
+.recuperacion-back-button:hover {
+  color: #3b82f6;
+}

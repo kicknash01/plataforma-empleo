@@ -1,5 +1,3 @@
-// src/services/auth-service.ts
-
 import type { LoginCredentials, AuthResponse } from "../interfaces/auth.interfaces";
 
 const API_URL = 'https://rb93kccl-3000.use2.devtunnels.ms';
@@ -100,6 +98,51 @@ export const authService = {
     });
     const data = await response.json();
     if (!response.ok) throw new Error(data.message || 'Error al reenviar verificación');
+    return data;
+  },
+
+  // RECUPERACIÓN DE CONTRASEÑA
+
+  // Solicitar recuperación de contraseña
+  solicitarRecuperacion: async (email: string): Promise<{ message: string }> => {
+    if (USE_MOCK) {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      const mockToken = 'reset-token-' + Math.random().toString(36);
+      console.log(`📧 Email de recuperación enviado a: ${email}`);
+      console.log(`🔗 Link para resetear contraseña: http://localhost:5173/resetear-password?token=${mockToken}`);
+
+      return { message: 'Email de recuperación enviado' };
+    }
+
+    const response = await fetch(`${API_URL}/auth/solicitar-recuperacion`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message || 'Error al solicitar recuperación');
+    return data;
+  },
+
+  // Resetear contraseña con token
+  resetearPassword: async (token: string, newPassword: string): Promise<{ message: string }> => {
+    if (USE_MOCK) {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      if (token && token.startsWith('reset-token-')) {
+        return { message: 'Contraseña restablecida correctamente' };
+      }
+      throw new Error('Token inválido o expirado');
+    }
+
+    const response = await fetch(`${API_URL}/auth/resetear-password`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token, newPassword }),
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message || 'Error al restablecer contraseña');
     return data;
   },
 };

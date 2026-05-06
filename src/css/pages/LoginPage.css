@@ -11,8 +11,28 @@
   color: #3b82f6;
   cursor: pointer;
   font-size: 0.875rem;
+  transition: all 0.2s;
 }
 
 .login-register-button:hover {
+  text-decoration: underline;
+}
+
+.login-forgot-link {
+  text-align: center;
+  margin-top: 0.75rem;
+}
+
+.login-forgot-button {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: color 0.2s;
+}
+
+.login-forgot-button:hover {
+  color: #6b7280;
   text-decoration: underline;
 }

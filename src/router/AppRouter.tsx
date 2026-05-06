@@ -4,7 +4,9 @@ import LoginPage from '../components/pages/LoginPage';
 import RegistroSelectorPage from '../components/pages/RegistroSelectorPage';
 import RegisterCandidatoPage from '../components/pages/RegisterCandidatoPage';
 import RegisterEmpresaPage from '../components/pages/RegisterEmpresaPage';
-import VerificarEmailPage from '../components/pages/VerificarEmailPage';  // ← NUEVA IMPORTACIÓN
+import VerificarEmailPage from '../components/pages/VerificarEmailPage';
+import SolicitarRecuperacionPage from '../components/pages/SolicitarRecuperacionPage';  // ← NUEVA
+import ResetearPasswordPage from '../components/pages/ResetearPasswordPage';          // ← NUEVA
 import EditarPerfilCandidato from '../components/pages/EditarPerfilCandidato';
 import EditarPerfilEmpresa from '../components/pages/EditarPerfilEmpresa';
 import DashboardRouter from '../components/DashboardRouter';
@@ -35,8 +37,12 @@ export const AppRouter: React.FC = () => {
         <Route path="/registro/candidato" element={<RegisterCandidatoPage />} />
         <Route path="/registro/empresa" element={<RegisterEmpresaPage />} />
 
-        {/* Ruta de verificación de email - NUEVA */}
+        {/* Ruta de verificación de email */}
         <Route path="/verificar-email" element={<VerificarEmailPage />} />
+
+        {/* Rutas de recuperación de contraseña - NUEVAS */}
+        <Route path="/solicitar-recuperacion" element={<SolicitarRecuperacionPage />} />
+        <Route path="/resetear-password" element={<ResetearPasswordPage />} />
 
         {/* Rutas de editar perfil */}
         <Route path="/editar-perfil/candidato" element={

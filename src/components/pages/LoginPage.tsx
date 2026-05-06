@@ -42,12 +42,24 @@ const LoginPage: React.FC = () => {
         serverError={serverError}
         onClearError={handleClearError}
       />
+
+      {/* Enlace para registrarse */}
       <div className="login-register-link">
         <button
           onClick={() => navigate('/registro/seleccionar')}
           className="login-register-button"
         >
           ¿No tienes cuenta? Regístrate
+        </button>
+      </div>
+
+      {/* Enlace para recuperar contraseña */}
+      <div className="login-forgot-link">
+        <button
+          onClick={() => navigate('/solicitar-recuperacion')}
+          className="login-forgot-button"
+        >
+          ¿Olvidaste tu contraseña?
         </button>
       </div>
     </AuthTemplate>
