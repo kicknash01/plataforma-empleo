@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from '../components/pages/LoginPage';  // ← NUEVO
 import RegistroSelectorPage from '../components/pages/RegistroSelectorPage';  // ← NUEVO
@@ -9,6 +8,7 @@ import EditarPerfilEmpresa from '../components/pages/EditarPerfilEmpresa';
 import DashboardRouter from '../components/DashboardRouter';
 import { useAuthStore } from '../stores/auth-store';
 
+
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user } = useAuthStore();
   if (!user) {
@@ -16,6 +16,8 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
   }
   return <>{children}</>;
 };
+
+
 
 export const AppRouter: React.FC = () => {
   return (

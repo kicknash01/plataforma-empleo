@@ -11,11 +11,11 @@ const DashboardRouter: React.FC = () => {
   }
 
   // Mostrar dashboard según el rol del usuario
-  if (user.rol === 'candidato') {
+  if (user.role === 'USER') {
     return <DashboardCandidato />;
   }
 
-  if (user.rol === 'empresa') {
+  if (user.role === 'COMPANY') {
     return <DashboardEmpresa />;
   }
 

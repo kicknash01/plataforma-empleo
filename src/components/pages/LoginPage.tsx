@@ -12,6 +12,8 @@ const LoginPage: React.FC = () => {
   const [serverError, setServerError] = useState<string | null>(null);
   const { setUser, setAccessToken } = useAuthStore();
 
+
+
   const handleLogin = async (email: string, password: string) => {
     setIsLoading(true);
     setServerError(null);
@@ -19,9 +21,9 @@ const LoginPage: React.FC = () => {
     try {
       const response = await authService.login({ email, password });
       setUser(response.user);
-      setAccessToken(response.access_token);
+      setAccessToken(response.message);
       navigate('/dashboard');
-    } catch (err: unknown) {
+    } catch (err) {
       if (err instanceof Error) {
         setServerError(err.message);
       } else {

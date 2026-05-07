@@ -11,9 +11,9 @@ export const editarEmpresaSchema = z.object({
     .min(1, 'El email es requerido')
     .email('Email inválido'),
 
-  rut: z
+  rif: z
     .string()
-    .min(9, 'RUT inválido (ejemplo: 12345678-9)')
+    .min(9, 'RUT inválido (ejemplo: rif:12345678)')
     .max(12, 'RUT inválido')
     .regex(/^\d{7,8}-[\dkK]$/, 'Formato de RUT inválido'),
 
@@ -36,7 +36,7 @@ export const editarEmpresaSchema = z.object({
     .optional()
     .or(z.literal('')),
 
-  tamanio: z
+  tamaño: z
     .string()
     .optional(),
 

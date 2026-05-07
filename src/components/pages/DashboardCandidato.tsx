@@ -5,10 +5,11 @@ import { useChatStore } from '../../stores/chatStore';
 import { ChatFloatingButton } from '../molecules/ChatFloatingButton';
 import { ChatDrawer } from '../organisms/ChatDrawer';
 import '../../css/pages/DashboardCandidato.css';
+import { authService } from '../../services/auth-service';
 
 const DashboardCandidato: React.FC = () => {
   const navigate = useNavigate();
-  const { user, logout } = useAuthStore();
+  const { user, clearUser } = useAuthStore();
   const { conversaciones } = useChatStore();
   const [isChatOpen, setIsChatOpen] = useState(false);
 
@@ -18,6 +19,12 @@ const DashboardCandidato: React.FC = () => {
   if (!user) {
     return <div>Cargando...</div>;
   }
+
+  const logout = async () => {
+    await authService.logout(); // POST /auth/logout que destruye la sesión/refresco
+    clearUser();
+    navigate('/login');
+  };
 
   return (
     <div className="dashboard-candidato">

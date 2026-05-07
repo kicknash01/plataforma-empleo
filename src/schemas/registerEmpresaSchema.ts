@@ -20,11 +20,11 @@ export const registerEmpresaSchema = z.object({
     .string()
     .min(6, 'La contraseña debe tener al menos 6 caracteres'),
 
-  rut: z
+  rif: z
     .string()
-    .min(9, 'RUT inválido (ejemplo: 12345678-9)')
+    .min(9, 'RUT inválido (ejemplo: rif-12345678)')
     .max(12, 'RUT inválido')
-    .regex(/^\d{7,8}-[\dkK]$/, 'Formato de RUT inválido (ejemplo: 12345678-9)'),
+    .regex(/^\d{7,8}-[\dkK]$/, 'Formato de RUT inválido (ejemplo: rif-12345678)'),
 
   telefono: z
     .string()
