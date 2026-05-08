@@ -5,11 +5,16 @@ import RegistroSelectorPage from '../components/pages/RegistroSelectorPage';
 import RegisterCandidatoPage from '../components/pages/RegisterCandidatoPage';
 import RegisterEmpresaPage from '../components/pages/RegisterEmpresaPage';
 import VerificarEmailPage from '../components/pages/VerificarEmailPage';
-import SolicitarRecuperacionPage from '../components/pages/SolicitarRecuperacionPage';  // ← NUEVA
-import ResetearPasswordPage from '../components/pages/ResetearPasswordPage';          // ← NUEVA
+import SolicitarRecuperacionPage from '../components/pages/SolicitarRecuperacionPage';
+import ResetearPasswordPage from '../components/pages/ResetearPasswordPage';
 import EditarPerfilCandidato from '../components/pages/EditarPerfilCandidato';
 import EditarPerfilEmpresa from '../components/pages/EditarPerfilEmpresa';
 import DashboardRouter from '../components/DashboardRouter';
+import OfertasDisponiblesPage from '../components/pages/OfertasDisponiblesPage';
+import DetalleOfertaPage from '../components/pages/DetalleOfertaPage';
+import CrearOfertaPage from '../components/pages/CrearOfertaPage';
+import MisOfertasPage from '../components/pages/MisOfertasPage';
+import EditarOfertaPage from '../components/pages/EditarOfertaPage';
 import { useAuthStore } from '../stores/auth-store';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -24,27 +29,25 @@ export const AppRouter: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Ruta principal - Redirige al login */}
+        {/* Ruta principal */}
         <Route path="/" element={<Navigate to="/login" replace />} />
 
-        {/* Login unificado */}
+        {/* Login */}
         <Route path="/login" element={<LoginPage />} />
 
-        {/* Selección de rol para registro */}
+        {/* Registro */}
         <Route path="/registro/seleccionar" element={<RegistroSelectorPage />} />
-
-        {/* Rutas de registro */}
         <Route path="/registro/candidato" element={<RegisterCandidatoPage />} />
         <Route path="/registro/empresa" element={<RegisterEmpresaPage />} />
 
-        {/* Ruta de verificación de email */}
+        {/* Verificación email */}
         <Route path="/verificar-email" element={<VerificarEmailPage />} />
 
-        {/* Rutas de recuperación de contraseña - NUEVAS */}
+        {/* Recuperación contraseña */}
         <Route path="/solicitar-recuperacion" element={<SolicitarRecuperacionPage />} />
         <Route path="/resetear-password" element={<ResetearPasswordPage />} />
 
-        {/* Rutas de editar perfil */}
+        {/* Editar perfil */}
         <Route path="/editar-perfil/candidato" element={
           <ProtectedRoute>
             <EditarPerfilCandidato />
@@ -56,14 +59,41 @@ export const AppRouter: React.FC = () => {
           </ProtectedRoute>
         } />
 
-        {/* Ruta protegida del dashboard */}
+        {/* ========== OFERTAS ========== */}
+        <Route path="/ofertas" element={
+          <ProtectedRoute>
+            <OfertasDisponiblesPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/oferta/:id" element={
+          <ProtectedRoute>
+            <DetalleOfertaPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/crear-oferta" element={
+          <ProtectedRoute>
+            <CrearOfertaPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/mis-ofertas" element={
+          <ProtectedRoute>
+            <MisOfertasPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/editar-oferta/:id" element={
+          <ProtectedRoute>
+            <EditarOfertaPage />
+          </ProtectedRoute>
+        } />
+
+        {/* Dashboard */}
         <Route path="/dashboard" element={
           <ProtectedRoute>
             <DashboardRouter />
           </ProtectedRoute>
         } />
 
-        {/* Redirección para rutas no encontradas */}
+        {/* 404 */}
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
